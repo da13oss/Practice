@@ -1,0 +1,71 @@
+What is source code?
+
+Source code is the human-readable set of instructions written 
+by a programmer in a programming language, which is then compiled 
+or interpreted to create executable software.
+
+What makes computers so “smart”, anyway? 
+Computers are "smart" because they process vast amounts of data and 
+execute complex algorithms at incredibly high speeds, 
+following the precise instructions given by their programming.
+
+What is the purpose of a programming language?
+ A programming language allows humans to communicate with 
+ computers by providing a set of rules and syntax for writing 
+ code that the computer can execute.
+
+What are 3 examples of programming languages?
+ Why are there so many of these? Examples include Python, Java, and JavaScript. 
+ There are many languages because different languages are suited for different tasks, 
+ environments, and performance requirements.
+
+What is a variable? Why are variables useful?
+ A variable is a symbolic name associated with a value, 
+ used to store and manipulate data within a program. 
+ Variables are useful because they allow for dynamic and flexible code.
+
+What is the difference between a single-equals (=) and a double-equals (==)? 
+ A single-equals (=) is used for assignment, setting the value of a variable. 
+ A double-equals (==) is used for comparison, checking if two values are equal.
+
+What is the difference between a double-equals (==) and a triple-equals (===)?
+ A double-equals (==) checks for value equality, performing type conversion if necessary. 
+ A triple-equals (===) checks for both value and type equality without type conversion.
+
+Why does the developer console exist? 
+ The developer console exists to provide developers with tools to inspect, debug, and interact
+ with their code and web applications in real time.
+
+When we talk about “conditional” statements, what does that mean? What is an example? 
+ Conditional statements are used to perform different actions based on different conditions. 
+ An example is an if statement: if (score >= 90) { grade = 'A'; }.
+
+Why would we want FOR or WHILE loops in our source code? 
+ We use FOR or WHILE loops to execute a block of code multiple times,
+ enabling tasks such as iteration over arrays or repeated actions.
+
+When would you use a WHILE loop, instead of a FOR loop?
+ A WHILE loop is used when the number of iterations is not known beforehand 
+ and depends on a condition being met, while a FOR loop is used when the 
+ number of iterations is predetermined.
+
+What is a function? Why would we use functions?
+ A function is a reusable block of code that performs a specific task. 
+ We use functions to organize code, promote reuse, and improve readability.
+
+How many values can you receive back from a function? How many values can you send in? 
+ A function can return a single value (though that value can be a collection like an array or object). 
+ Functions can accept multiple input parameters.
+
+What is an array? 
+ How many values does it hold? An array is a data structure that holds a collection of values, 
+ usually of the same type, indexed by their position. It can hold as many values as the system memory allows.
+
+What is a T-diagram and why should I know how to use one? 
+ A T-diagram is a visual tool used to help understand and trace variable values during the execution of code, 
+ aiding in debugging and learning programming.
+
+What are the two ways to comment JS code? When would you use one versus the other? 
+ The two ways are single-line comments (// comment) and multi-line comments (/* comment */). 
+ Use single-line comments for brief notes and multi-line comments for longer explanations or 
+ to temporarily disable blocks of code.
