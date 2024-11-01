@@ -1,0 +1,89 @@
+/* Reset default styling (if necessary) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main grid layout */
+.app {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "nav main main";
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    height: 100vh;
+    background-color: #dddddd;
+    /* Add grey background */
+    padding: 20px;
+    /* Add padding to bring boxes in from the edges of the page */
+}
+
+/* Header styling */
+header {
+    grid-area: header;
+    background-color: #6aa84f;
+    padding: 20px;
+    /* Adjust padding to bring content away from edges */
+    text-align: center;
+    color: white;
+    border: 1px solid black;
+    /* Add black border */
+}
+
+/* Navigation styling */
+nav {
+    grid-area: nav;
+    background-color: #6fa8dc;
+    padding: 20px;
+    /* Adjust padding to bring content away from edges */
+    color: white;
+    border: 1px solid black;
+    /* Add black border */
+    height: (50%);
+    /* Make the navigation box slightly taller */
+}
+
+/* Main content area */
+.main-content {
+    grid-area: main;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 10px;
+    background-color: #e06666;
+    padding: 20px;
+    /* Adjust padding to bring content away from edges */
+    border: 1px solid black;
+    /* Add black border */
+}
+
+/* Subcontent container */
+.subcontent-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    height: 100%;
+}
+
+.subcontent-container>div {
+    background-color: #ffd966;
+    padding: 20px;
+    /* Adjust padding to bring content away from edges */
+    height: 100%;
+    border: 1px solid black;
+    /* Add black border */
+}
+
+/* Advertisement styling */
+.advertisement {
+    background-color: #b4a7d6;
+    padding: 20px;
+    /* Adjust padding to bring content away from edges */
+    grid-column: span 3;
+    /* Make the advertisement span across all columns */
+    height: 100%;
+    border: 1px solid black;
+    /* Add black border */
+}
