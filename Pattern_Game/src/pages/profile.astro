@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.svelte';
+---
+
+<Layout title="Profile - Pattern Memory Puzzle">
+  <Navigation client:load />
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto bg-gray-800 p-8 rounded-lg">
+      <h1 class="text-2xl font-bold mb-6">Profile Settings</h1>
+      <form id="profileForm" class="space-y-4">
+        <div>
+          <label for="email" class="block mb-1">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="w-full px-3 py-2 bg-gray-700 rounded"
+          />
+        </div>
+        <div>
+          <label for="currentPassword" class="block mb-1">Current Password</label>
+          <input
+            type="password"
+            id="currentPassword"
+            name="currentPassword"
+            class="w-full px-3 py-2 bg-gray-700 rounded"
+          />
+        </div>
+        <div>
+          <label for="newPassword" class="block mb-1">New Password</label>
+          <input
+            type="password"
+            id="newPassword"
+            name="newPassword"
+            class="w-full px-3 py-2 bg-gray-700 rounded"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
+        >
+          Update Profile
+        </button>
+      </form>
+
+      <div class="mt-8">
+        <h2 class="text-xl font-bold mb-4">High Scores</h2>
+        <div id="highScores" class="space-y-2"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Load user data and high scores
+  async function loadUserData() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/user/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        document.getElementById('email')!.value = data.email;
+        
+        // Load high scores
+        const scoresHtml = data.scores
+          .map((score: number, index: number) => `
+            <div class="bg-gray-700 p-2 rounded">
+              Game ${index + 1}: ${score} points
+            </div>
+          `)
+          .join('');
+        document.getElementById('highScores')!.innerHTML = scoresHtml;
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  }
+
+  // Update profile
+  const form = document.getElementById('profileForm');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form as HTMLFormElement);
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch('/api/user/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          email: formData.get('email'),
+          currentPassword: formData.get('currentPassword'),
+          newPassword: formData.get('newPassword'),
+        }),
+      });
+
+      if (response.ok) {
+        alert('Profile updated successfully');
+        window.location.reload();
+      } else {
+        const error = await response.json();
+        alert(error.message || 'Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Update error:', error);
+      alert('An error occurred while updating profile');
+    }
+  });
+
+  // Load user data when page loads
+  loadUserData();
+</script>

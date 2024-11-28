@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.svelte';
+import Toast from '../components/Toast.svelte';
+---
+
+<Layout title="Login - Pattern Memory Puzzle">
+  <Navigation client:load />
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto bg-gray-800 p-8 rounded-lg">
+      <h1 class="text-2xl font-bold mb-6">Login</h1>
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label for="username" class="block mb-1">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            class="w-full px-3 py-2 bg-gray-700 rounded text-white"
+          />
+        </div>
+        <div>
+          <label for="password" class="block mb-1">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full px-3 py-2 bg-gray-700 rounded text-white"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <div id="toastContainer"></div>
+</Layout>
+
+<script>
+  import Toast from '../components/Toast.svelte';
+
+  const form = document.getElementById('loginForm');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form as HTMLFormElement);
+    
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.get('username'),
+          password: formData.get('password'),
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        
+        // Show success toast
+        new Toast({
+          target: document.getElementById('toastContainer')!,
+          props: {
+            message: 'Login successful! Redirecting...',
+            type: 'success'
+          }
+        });
+
+        // Redirect after toast shows
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1500);
+      } else {
+        // Show error toast
+        new Toast({
+          target: document.getElementById('toastContainer')!,
+          props: {
+            message: 'Invalid credentials',
+            type: 'error'
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      // Show error toast
+      new Toast({
+        target: document.getElementById('toastContainer')!,
+        props: {
+          message: 'An error occurred during login',
+          type: 'error'
+        }
+      });
+    }
+  });
+</script>
