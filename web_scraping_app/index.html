@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Scraper</title>
+</head>
+
+<body>
+    <h1>Web Scraper</h1>
+    <input type="text" id="url" placeholder="Enter URL">
+    <button onclick="scrape()">Scrape</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function scrape() {
+            const url = document.getElementById('url').value;
+            const response = await fetch(`/scrape?url=${encodeURIComponent(url)}`);
+            const data = await response.json();
+            document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+
+</html>
