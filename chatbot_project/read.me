@@ -1,0 +1,46 @@
+# Chatbot Project
+
+## Description
+This project is a full-stack Python web application featuring a chatbot that utilizes a pre-trained conversational model. The application is hosted on AWS and includes a simple web interface for interaction.
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd chatbot_project
+
+2. Set up a virtual environment and activate it:
+
+    python3 -m venv venv
+    source venv/bin/activate  # Use `venv\Scripts\activate` on Windows
+
+3. Install the dependencies:
+
+    pip install -r requirements.txt
+
+###Usage
+
+1. Run the backend API:
+    python app.py
+
+2. Open index.html in your web browser to interact with the chatbot.
+
+####Deployment
+Follow the AWS documentation to set up an EC2 instance and deploy the application.
+
+
+### 7. Code Comments
+
+Here's an example of adding comments to your code:
+
+```python
+from transformers import pipeline
+
+# Load a pre-trained conversational model
+chatbot = pipeline("conversational")
+
+# Function to get a response from the chatbot
+def get_response(input_text):
+    return chatbot(input_text)[0]['generated_text']
